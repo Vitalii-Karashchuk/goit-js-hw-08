@@ -66,7 +66,6 @@ const images = [
 
   
 const container = document.querySelector('.gallery');
-
 container.insertAdjacentHTML("beforeend", addСards(images));
 function addСards(images){
     return images.map(image => {
@@ -85,27 +84,25 @@ function addСards(images){
    .join('');
 }
 
-console.log("container:", container);
-
   function handleImg (event) {
        event.preventDefault();
-    if (event.target === event.currentTarget) {
-        return
-    }
-        const current = event.target.closest('.gallery-item');
         
-
-    const instanse = basicLightbox.create(`
-       <div class="modal">
-            <img src="" alt="">
-        </div>
-    `)
-    instanse.show()
+    if (event.target.classList.contains('gallery-image')) {
+        const largeImageUrl = event.target.dataset.source;
+        openModal(largeImageUrl);
+      }
+    };
+    
+       function openModal(imageUrl) {
+      const instance = basicLightbox.create(`
+        <img src="${imageUrl}" >
+      `);
+    
+      instance.show();
  };
  
-
  container.addEventListener('click', handleImg);
- console.log("🚀 ~ container:", basicLightbox)
+ 
 
 
  
